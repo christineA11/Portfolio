@@ -684,6 +684,7 @@
     [data-theme="light"] .footer-sub { color: var(--muted); }
     [data-theme="light"] .cap-pill { background: var(--bg2); color: var(--text); border-color: var(--border); }
   </style>
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 </head>
 <body>
 
@@ -1007,6 +1008,7 @@
         <div class="form-group"><label>EMAIL ADDRESS</label><input type="email" name="email" placeholder="jane@example.com" required /></div>
         <div class="form-group"><label>SUBJECT</label><input type="text" name="subject" placeholder="Project inquiry, collaboration..." /></div>
         <div class="form-group"><label>MESSAGE</label><textarea name="message" placeholder="Tell me about your project or opportunity..." required></textarea></div>
+        <div class="h-captcha" data-sitekey="f0b6b14a-6ac2-4508-a454-8bee0e4833c6" data-theme="dark" id="hcaptcha-widget"></div>
         <button type="submit" id="submit-btn" class="btn-primary magnetic" style="border:none; font-size:0.9rem; width:fit-content;">Send Message →</button>
       </form>
     </div>
@@ -1448,6 +1450,14 @@ async function handleSubmit(e) {
   const form = e.target;
   const btn  = document.getElementById('submit-btn');
 
+  const captchaToken = hcaptcha.getResponse();
+  if (!captchaToken) {
+    btn.textContent = '✗ Please complete the CAPTCHA';
+    btn.style.background = 'linear-gradient(135deg,#7a2d2d,#ab3a3a)';
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; }, 3000);
+    return;
+  }
+
   btn.textContent = 'Sending…';
   btn.disabled = true;
 
@@ -1462,6 +1472,7 @@ async function handleSubmit(e) {
       btn.textContent = '✓ Message Sent!';
       btn.style.background = 'linear-gradient(135deg,#2d7a4f,#3aab6f)';
       form.reset();
+      hcaptcha.reset();
       setTimeout(() => {
         btn.textContent = 'Send Message →';
         btn.style.background = '';
@@ -1491,6 +1502,11 @@ function applyTheme(theme) {
   root.setAttribute('data-theme', theme);
   themeBtn.textContent = theme === 'light' ? '☀️' : '🌙';
   localStorage.setItem('portfolio-theme', theme);
+  const widget = document.getElementById('hcaptcha-widget');
+  if (widget && typeof hcaptcha !== 'undefined') {
+    widget.setAttribute('data-theme', theme === 'light' ? 'light' : 'dark');
+    try { hcaptcha.reset(); } catch {}
+  }
 }
 
 themeBtn.addEventListener('click', () => {
