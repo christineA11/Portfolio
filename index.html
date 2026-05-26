@@ -484,6 +484,66 @@
       padding: 0.2rem 0.6rem; border-radius: 50px; letter-spacing: 0.3px;
     }
 
+    /* ─── Project Preview ─── */
+    .project-preview { margin-bottom: 1.2rem; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+
+    /* ── Live Automation Diagram ── */
+    @keyframes packetFlow {
+      0%   { left: -5px; opacity: 0; }
+      8%   { opacity: 1; }
+      92%  { opacity: 1; }
+      100% { left: calc(100% + 5px); opacity: 0; }
+    }
+    @keyframes nodeGlow {
+      0%,100% { border-color: rgba(212,88,122,0.25); box-shadow: none; }
+      50%      { border-color: var(--accent); box-shadow: 0 0 12px rgba(212,88,122,0.45); }
+    }
+    .wf-live { padding: 0.9rem 0.7rem; display: flex; align-items: center; background: var(--bg2); overflow: hidden; }
+    .wfl-node { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; flex-shrink: 0; }
+    .wfl-box {
+      background: var(--card); border: 1px solid rgba(212,88,122,0.25);
+      border-radius: 7px; padding: 0.32rem 0.5rem;
+      display: flex; align-items: center; gap: 0.28rem;
+      animation: nodeGlow 3s ease-in-out var(--nd, 0s) infinite;
+    }
+    .wfl-icon { font-size: 0.82rem; }
+    .wfl-name { font-size: 0.58rem; color: var(--text); font-weight: 600; white-space: nowrap; }
+    .wfl-type { font-size: 0.48rem; color: var(--muted); letter-spacing: 0.3px; }
+    .wfl-conn { flex: 1; min-width: 18px; height: 2px; background: rgba(212,88,122,0.12); position: relative; }
+    .wfl-conn::after { content: ''; position: absolute; right: -3px; top: -3px; border: 4px solid transparent; border-left-color: rgba(212,88,122,0.4); }
+    .wfl-packet {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 7px; height: 7px; background: var(--accent); border-radius: 50%;
+      box-shadow: 0 0 8px rgba(212,88,122,0.9), 0 0 16px rgba(212,88,122,0.4);
+      animation: packetFlow var(--pd, 2.4s) linear var(--delay, 0s) infinite;
+    }
+
+    /* ── GHL Landing Page (scaled real design — indigo/cyan theme) ── */
+    .lp-wrap { height: 210px; overflow: hidden; position: relative; background: #07091a; }
+    .lp-scale { transform: scale(0.42); transform-origin: top left; width: calc(100% / 0.42); font-family: 'Segoe UI', sans-serif; }
+    .lpf-nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: rgba(7,9,26,0.97); border-bottom: 1px solid rgba(99,102,241,0.2); }
+    .lpf-logo { font-weight: 800; font-size: 1.1rem; color: #fff; letter-spacing: 1px; }
+    .lpf-logo span { color: #06b6d4; }
+    .lpf-nav-btn { background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.45); color: #818cf8; font-size: 0.75rem; font-weight: 700; padding: 0.35rem 0.9rem; border-radius: 50px; letter-spacing: 0.5px; }
+    .lpf-hero { padding: 2.5rem 2rem 2rem; background: linear-gradient(135deg, #07091a 0%, #0e1035 50%, #07091a 100%); position: relative; overflow: hidden; }
+    .lpf-hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(99,102,241,0.2) 0%, transparent 70%); pointer-events: none; }
+    .lpf-hero::after  { content: ''; position: absolute; bottom: -40px; left: 30%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 70%); pointer-events: none; }
+    .lpf-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.35); color: #22d3ee; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; padding: 0.3rem 0.9rem; border-radius: 50px; margin-bottom: 1.2rem; }
+    .lpf-h1 { font-size: 2.6rem; font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 0.8rem; }
+    .lpf-h1 span { background: linear-gradient(90deg, #818cf8, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .lpf-sub { font-size: 0.95rem; color: #8892b0; line-height: 1.6; margin-bottom: 1.6rem; max-width: 480px; }
+    .lpf-form { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; max-width: 520px; }
+    .lpf-input { background: rgba(255,255,255,0.04); border: 1px solid rgba(99,102,241,0.25); color: #fff; font-size: 0.85rem; padding: 0.6rem 0.9rem; border-radius: 8px; outline: none; }
+    .lpf-input::placeholder { color: #3d4466; }
+    .lpf-btn { grid-column: 1/-1; background: linear-gradient(135deg, #6366f1, #06b6d4); color: #fff; font-size: 0.9rem; font-weight: 700; padding: 0.75rem; border-radius: 8px; border: none; letter-spacing: 0.5px; cursor: pointer; box-shadow: 0 4px 20px rgba(99,102,241,0.35); }
+    .lpf-trust { display: flex; align-items: center; gap: 1rem; margin-top: 1.2rem; flex-wrap: wrap; }
+    .lpf-stars { color: #fbbf24; font-size: 0.85rem; letter-spacing: 1px; }
+    .lpf-trust-txt { font-size: 0.72rem; color: #4a5278; }
+    .lpf-divider { width: 1px; height: 14px; background: rgba(99,102,241,0.25); }
+    .lpf-features { display: flex; gap: 2rem; padding: 1.2rem 2rem; background: rgba(99,102,241,0.05); border-top: 1px solid rgba(99,102,241,0.12); }
+    .lpf-feat { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: #8892b0; }
+    .lpf-feat-icon { font-size: 1rem; }
+
     /* ─── Experience ─── */
     #experience { background: var(--bg); }
     .timeline { margin-top: 3rem; position: relative; }
@@ -943,6 +1003,174 @@
         </ul>
         <div class="project-tools"><span class="tool-tag">Google Workspace</span><span class="tool-tag">Notion</span><span class="tool-tag">Canva</span><span class="tool-tag">Xero</span></div>
       </div>
+      <div class="project-card reveal"><div class="card-shine"></div>
+        <div class="project-num">05</div><div class="project-icon">🎯</div>
+        <h3 class="project-title">GHL Marketing Funnels & Landing Pages</h3>
+        <p class="project-sub">GoHighLevel · Funnel Design · Marketing Automation</p>
+        <div class="project-preview">
+          <div class="lp-wrap">
+            <div class="lp-scale">
+              <div class="lpf-nav">
+                <div class="lpf-logo">⚡ Auto<span>Flow</span></div>
+                <div class="lpf-nav-btn">Book a Call</div>
+              </div>
+              <div class="lpf-hero">
+                <div class="lpf-badge">🚀 LIMITED SPOTS — BOOK NOW</div>
+                <div class="lpf-h1">Build Systems That<br><span>Run Your Business</span></div>
+                <div class="lpf-sub">Book a free 30-min strategy call with a workflow automation expert. We'll design your custom system — no code required.</div>
+                <div class="lpf-form">
+                  <input class="lpf-input" placeholder="Your Full Name" />
+                  <input class="lpf-input" placeholder="Company Name" />
+                  <input class="lpf-input" placeholder="Work Email" />
+                  <input class="lpf-input" placeholder="Current Challenge" />
+                  <div class="lpf-btn">📅 Book My Free Strategy Call →</div>
+                </div>
+                <div class="lpf-trust">
+                  <span class="lpf-stars">★★★★★</span>
+                  <span class="lpf-trust-txt">4.9 / 5.0</span>
+                  <div class="lpf-divider"></div>
+                  <span class="lpf-trust-txt">50+ Workflows Built</span>
+                  <div class="lpf-divider"></div>
+                  <span class="lpf-trust-txt">Zero Code Required</span>
+                </div>
+              </div>
+              <div class="lpf-features">
+                <div class="lpf-feat"><span class="lpf-feat-icon">⚡</span>Same-day Setup</div>
+                <div class="lpf-feat"><span class="lpf-feat-icon">🔒</span>100% Confidential</div>
+                <div class="lpf-feat"><span class="lpf-feat-icon">🎯</span>Results Guaranteed</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="project-desc">Demo marketing funnels and landing pages built inside GoHighLevel — designed to capture leads, nurture prospects, and drive conversions for small business clients.</p>
+        <ul class="project-features">
+          <li>Multi-step lead capture funnels with opt-in forms</li>
+          <li>Automated follow-up sequences via email & SMS</li>
+          <li>Custom landing pages with CTA sections and social proof</li>
+          <li>Pipeline and contact management setup for client tracking</li>
+        </ul>
+        <div class="project-tools"><span class="tool-tag">GoHighLevel</span><span class="tool-tag">Funnel Builder</span><span class="tool-tag">Email Automation</span><span class="tool-tag">CRM</span></div>
+      </div>
+
+      <div class="project-card reveal"><div class="card-shine"></div>
+        <div class="project-num">06</div><div class="project-icon">⚡</div>
+        <h3 class="project-title">n8n Workflow Automations</h3>
+        <p class="project-sub">n8n · API Integrations · Workflow Design</p>
+        <div class="project-preview">
+          <div class="wf-live">
+            <div class="wfl-node"><div class="wfl-box" style="--nd:0s"><span class="wfl-icon">🔗</span><span class="wfl-name">Webhook</span></div><span class="wfl-type">Trigger</span></div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:0s;--pd:2.8s"></div></div>
+            <div class="wfl-node"><div class="wfl-box" style="--nd:0.7s"><span class="wfl-icon">🔍</span><span class="wfl-name">Filter</span></div><span class="wfl-type">Logic</span></div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:0.7s;--pd:2.8s"></div></div>
+            <div class="wfl-node"><div class="wfl-box" style="--nd:1.4s"><span class="wfl-icon">📊</span><span class="wfl-name">Sheets</span></div><span class="wfl-type">Store</span></div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:1.4s;--pd:2.8s"></div></div>
+            <div class="wfl-node"><div class="wfl-box" style="--nd:2.1s"><span class="wfl-icon">💬</span><span class="wfl-name">Slack</span></div><span class="wfl-type">Notify</span></div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:2.1s;--pd:2.8s"></div></div>
+            <div class="wfl-node"><div class="wfl-box" style="--nd:2.8s"><span class="wfl-icon">✅</span><span class="wfl-name">Done</span></div><span class="wfl-type">End</span></div>
+          </div>
+        </div>
+        <p class="project-desc">End-to-end automation workflows built in n8n — connecting APIs, processing data, and triggering actions across multiple platforms without manual intervention.</p>
+        <ul class="project-features">
+          <li>Webhook-triggered pipelines that process incoming data instantly</li>
+          <li>Multi-branch conditional logic for smart routing</li>
+          <li>Google Sheets + Slack integration for real-time team alerts</li>
+          <li>Error handling nodes with automatic retry and logging</li>
+        </ul>
+        <div class="project-tools"><span class="tool-tag">n8n</span><span class="tool-tag">Webhooks</span><span class="tool-tag">REST APIs</span><span class="tool-tag">Google Sheets</span><span class="tool-tag">Slack</span></div>
+      </div>
+
+      <div class="project-card reveal"><div class="card-shine"></div>
+        <div class="project-num">07</div><div class="project-icon">🔄</div>
+        <h3 class="project-title">Make (Integromat) Scenarios</h3>
+        <p class="project-sub">Make · Multi-step Scenarios · Data Routing</p>
+        <div class="project-preview">
+          <div class="wf-live">
+            <div class="wfl-node"><div class="wfl-box" style="--nd:0s"><span class="wfl-icon">📋</span><span class="wfl-name">Coda</span></div><span class="wfl-type">Watch</span></div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:0s;--pd:3s"></div></div>
+            <div class="wfl-node"><div class="wfl-box" style="--nd:0.75s"><span class="wfl-icon">⚙️</span><span class="wfl-name">Transform</span></div><span class="wfl-type">Map</span></div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:0.75s;--pd:3s"></div></div>
+            <div class="wfl-node"><div class="wfl-box" style="--nd:1.5s"><span class="wfl-icon">📧</span><span class="wfl-name">Email</span></div><span class="wfl-type">Send</span></div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:1.5s;--pd:3s"></div></div>
+            <div class="wfl-node"><div class="wfl-box" style="--nd:2.25s"><span class="wfl-icon">📈</span><span class="wfl-name">Metabase</span></div><span class="wfl-type">Log</span></div>
+          </div>
+        </div>
+        <p class="project-desc">Visual multi-step automation scenarios built in Make (formerly Integromat) — watching for data changes and routing information across tools seamlessly.</p>
+        <ul class="project-features">
+          <li>Scenario triggers watching Coda docs for new/changed rows</li>
+          <li>Data transformation and field mapping between platforms</li>
+          <li>Automated email dispatching with dynamic content</li>
+          <li>Scheduled scenarios for recurring reporting and syncs</li>
+        </ul>
+        <div class="project-tools"><span class="tool-tag">Make</span><span class="tool-tag">Coda</span><span class="tool-tag">Metabase</span><span class="tool-tag">Email</span><span class="tool-tag">HTTP Modules</span></div>
+      </div>
+
+      <div class="project-card reveal"><div class="card-shine"></div>
+        <div class="project-num">08</div><div class="project-icon">⚡</div>
+        <h3 class="project-title">Zapier Automation Zaps</h3>
+        <p class="project-sub">Zapier · Trigger-Action Workflows · App Connections</p>
+        <div class="project-preview">
+          <div class="wf-live">
+            <div class="wfl-node"><div class="wfl-box" style="--nd:0s"><span class="wfl-icon">📝</span><span class="wfl-name">Form</span></div><span class="wfl-type">Trigger</span></div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:0s;--pd:3s"></div></div>
+            <div class="wfl-node"><div class="wfl-box" style="--nd:0.75s"><span class="wfl-icon">🗂️</span><span class="wfl-name">Notion</span></div><span class="wfl-type">Create</span></div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:0.75s;--pd:3s"></div></div>
+            <div class="wfl-node"><div class="wfl-box" style="--nd:1.5s"><span class="wfl-icon">💬</span><span class="wfl-name">Slack</span></div><span class="wfl-type">Alert</span></div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:1.5s;--pd:3s"></div></div>
+            <div class="wfl-node"><div class="wfl-box" style="--nd:2.25s"><span class="wfl-icon">🎯</span><span class="wfl-name">GHL</span></div><span class="wfl-type">Add Lead</span></div>
+          </div>
+        </div>
+        <p class="project-desc">Zapier zaps connecting everyday business tools — automating repetitive tasks between apps like forms, CRMs, Slack, and Notion with zero code.</p>
+        <ul class="project-features">
+          <li>Form submissions auto-create Notion database entries</li>
+          <li>New leads pushed directly into GHL CRM pipeline</li>
+          <li>Slack alerts triggered on key business events</li>
+          <li>Multi-step zaps with filters and formatting steps</li>
+        </ul>
+        <div class="project-tools"><span class="tool-tag">Zapier</span><span class="tool-tag">Notion</span><span class="tool-tag">GoHighLevel</span><span class="tool-tag">Slack</span><span class="tool-tag">Google Forms</span></div>
+      </div>
+
+      <div class="project-card reveal"><div class="card-shine"></div>
+        <div class="project-num">09</div><div class="project-icon">💬</div>
+        <h3 class="project-title">Slack Approval Workflow</h3>
+        <p class="project-sub">Slack Workflows · Google Sheets · Modal Notifications</p>
+        <div class="project-preview">
+          <div class="wf-live" style="padding: 0.9rem 0.5rem;">
+            <div class="wfl-node">
+              <div class="wfl-box" style="--nd:0s"><span class="wfl-icon">📝</span><span class="wfl-name">Form</span></div>
+              <span class="wfl-type">Submission</span>
+            </div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:0s;--pd:3.5s"></div></div>
+            <div class="wfl-node">
+              <div class="wfl-box" style="--nd:0.7s"><span class="wfl-icon">📊</span><span class="wfl-name">Sheets</span></div>
+              <span class="wfl-type">Log Entry</span>
+            </div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:0.7s;--pd:3.5s"></div></div>
+            <div class="wfl-node">
+              <div class="wfl-box" style="--nd:1.4s"><span class="wfl-icon">📢</span><span class="wfl-name">Channel</span></div>
+              <span class="wfl-type">Post</span>
+            </div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:1.4s;--pd:3.5s"></div></div>
+            <div class="wfl-node">
+              <div class="wfl-box" style="--nd:2.1s"><span class="wfl-icon">👤</span><span class="wfl-name">Sender</span></div>
+              <span class="wfl-type">Modal</span>
+            </div>
+            <div class="wfl-conn"><div class="wfl-packet" style="--delay:2.1s;--pd:3.5s"></div></div>
+            <div class="wfl-node">
+              <div class="wfl-box" style="--nd:2.8s"><span class="wfl-icon">✅</span><span class="wfl-name">Approver</span></div>
+              <span class="wfl-type">Notify</span>
+            </div>
+          </div>
+        </div>
+        <p class="project-desc">A fully automated Slack-native approval workflow — a form submission kicks off a chain that logs data, posts to a channel, and delivers interactive modals to both the requester and approver without leaving Slack.</p>
+        <ul class="project-features">
+          <li>Slack form submission triggers the entire workflow instantly</li>
+          <li>Entry auto-logged to Google Sheets for record-keeping</li>
+          <li>Formatted post published to a designated Slack channel</li>
+          <li>Interactive modal sent to the sender confirming submission</li>
+          <li>Separate approval modal dispatched to the assigned approver</li>
+        </ul>
+        <div class="project-tools"><span class="tool-tag">Slack Workflows</span><span class="tool-tag">Google Sheets</span><span class="tool-tag">Slack API</span><span class="tool-tag">Modals</span><span class="tool-tag">Block Kit</span></div>
+      </div>
     </div>
   </section>
 
@@ -1336,6 +1564,13 @@ const logoItems = [
   { name: 'Lucidchart',       icon: `${SI}/lucidchart/D4587A` },
   { name: 'PostgreSQL',       icon: `${SI}/postgresql/D4587A` },
   { name: 'GoHighLevel',      icon: `${SI}/gohighlevel/D4587A` },
+  { name: 'HubSpot',          icon: `${SI}/hubspot/D4587A` },
+  { name: 'n8n',              icon: `${SI}/n8n/D4587A` },
+  { name: 'Make',             icon: `${SI}/make/D4587A` },
+  { name: 'Zapier',           icon: `${SI}/zapier/D4587A` },
+  { name: 'GitHub',           icon: `${SI}/github/D4587A` },
+  { name: 'Visual Studio Code', icon: `${SI}/visualstudiocode/D4587A` },
+  { name: 'Trello',           icon: `${SI}/trello/D4587A` },
 ];
 
 // Build logos-only ticker
