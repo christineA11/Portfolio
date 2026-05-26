@@ -608,11 +608,43 @@
       footer { padding: 1.5rem; flex-direction: column; text-align: center; gap: 0.6rem; }
     }
 
+    /* ─── Hamburger button ─── */
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    #hamburger {
+      display: none; flex-direction: column; justify-content: center;
+      gap: 5px; width: 36px; height: 36px;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px;
+    }
+    #hamburger span {
+      display: block; width: 100%; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    #hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    #hamburger.open span:nth-child(2) { opacity: 0; }
+    #hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     /* Mobile */
     @media (max-width: 600px) {
-      nav { padding: 0.8rem 1rem; }
-      .nav-links a:not(.btn-nav) { display: none; }
-      .nav-links { gap: 0; }
+      nav { padding: 0.8rem 1rem; flex-wrap: wrap; }
+      #hamburger { display: flex; }
+      .nav-links {
+        display: none; flex-direction: column;
+        width: 100%; gap: 0;
+        background: var(--bg2); border: 1px solid var(--border);
+        border-radius: 12px; margin-top: 0.5rem;
+        overflow: hidden;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links .nav-item {
+        padding: 0.85rem 1.2rem; font-size: 0.95rem;
+        border-bottom: 1px solid var(--border);
+        color: var(--text) !important; letter-spacing: 1px;
+      }
+      .nav-links .nav-item:last-of-type { border-bottom: none; }
+      .nav-links .btn-nav { margin: 0.8rem 1.2rem; width: fit-content; }
+      #hero-canvas { opacity: 0.3 !important; }
       section { padding: 3.5rem 1rem; }
       #stats { padding: 2rem 1rem; }
       #hero { padding: 5.5rem 1rem 2.5rem; }
@@ -629,16 +661,6 @@
       footer p { font-size: 0.72rem; }
       .about-box { padding: 1.5rem; }
       .about-photo-col .about-photo-inner { max-width: 200px; }
-    }
-
-    /* Small mobile — show nav links as a wrapped row below logo */
-    @media (max-width: 600px) {
-      nav { flex-direction: column; align-items: flex-start; }
-      .nav-mobile-row {
-        display: flex; gap: 1rem; flex-wrap: wrap;
-        padding-top: 0.3rem; width: 100%;
-      }
-      .nav-links a:not(.btn-nav) { display: inline-block; font-size: 0.78rem; }
     }
 
     /* ─── Theme Toggle ─── */
@@ -695,14 +717,19 @@
   <!-- Navbar -->
   <nav>
     <div class="nav-logo">C<span>A</span></div>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-      <a href="resume.pdf" class="btn-nav" download="Christine_Asuncion_Resume.pdf">⬇ Download CV</a>
+    <div class="nav-right">
+      <div class="nav-links" id="nav-links">
+        <a href="#about" class="nav-item">About</a>
+        <a href="#skills" class="nav-item">Skills</a>
+        <a href="#projects" class="nav-item">Projects</a>
+        <a href="#experience" class="nav-item">Experience</a>
+        <a href="#contact" class="nav-item">Contact</a>
+        <a href="resume.pdf" class="btn-nav" download="Christine_Asuncion_Resume.pdf">⬇ Download CV</a>
+      </div>
       <button id="theme-toggle" title="Toggle theme" aria-label="Toggle light/dark theme">🌙</button>
+      <button id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
@@ -1493,7 +1520,28 @@ async function handleSubmit(e) {
 }
 
 /* ═══════════════════════════════════════
-   13. THEME TOGGLE
+   13. HAMBURGER MENU
+═══════════════════════════════════════ */
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('nav-links');
+
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  hamburger.setAttribute('aria-expanded', isOpen);
+});
+
+/* Close menu when a link is clicked */
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', false);
+  });
+});
+
+/* ═══════════════════════════════════════
+   14. THEME TOGGLE
 ═══════════════════════════════════════ */
 const themeBtn = document.getElementById('theme-toggle');
 const root     = document.documentElement;
