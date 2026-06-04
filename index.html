@@ -1730,6 +1730,25 @@ async function handleSubmit(e) {
   const form = e.target;
   const btn  = document.getElementById('submit-btn');
 
+  const firstName = form.first_name.value.trim();
+  const email     = form.email.value.trim();
+  const message   = form.message.value.trim();
+
+  if (!firstName || !email || !message) {
+    btn.textContent = '✗ Name, email & message are required';
+    btn.style.background = 'linear-gradient(135deg,#7a2d2d,#ab3a3a)';
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; }, 3000);
+    return;
+  }
+
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!emailValid) {
+    btn.textContent = '✗ Please enter a valid email address';
+    btn.style.background = 'linear-gradient(135deg,#7a2d2d,#ab3a3a)';
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; }, 3000);
+    return;
+  }
+
   const captchaToken = hcaptcha.getResponse();
   if (!captchaToken) {
     btn.textContent = '✗ Please complete the CAPTCHA';
